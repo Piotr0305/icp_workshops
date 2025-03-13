@@ -30,7 +30,7 @@ async fn translate(text: String) -> Result<String, String> {
         body: Some(format!(r#"{{"inputs": "{}"}}"#, text).into()),
         transform: None,
     };
-    let res = http_request(arg,(1_603_112_800 + text.len() * 400).tr_into().unwrap()).await.map_err(|error| format!("Error while querying data. Status: {:?}, Error: {}", error.0, error.1))?;
+    let res = http_request(arg,(1_603_112_800 + text.len() * 400).try_into().unwrap()).await.map_err(|error| format!("Error while querying data. Status: {:?}, Error: {}", error.0, error.1))?;
 
     println!("123 {:?}", res);
     println!("{:?}", String::from_utf8(res.0.body.clone()));
